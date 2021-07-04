@@ -1,0 +1,163 @@
+<% layout('layout/commonpage') %>
+
+
+
+
+
+    <div class="row">
+        <h1 align="center">Edit the existing Campground Here!!</h1>
+        <div class='col-md-6 offset-md-3'>
+
+            <form method="post" action='/index/<%= id._id %>?_method=PUT' class='formValid' novalidate
+                enctype="multipart/form-data">
+
+                <div class='mb-3'>
+                    <label class="form-label" for="title"><b>Title</b></label>
+                    <input class="form-control" type="text" id='title' name='title' value="<%= id.title %>" required>
+                    <div class=" valid-feedback">
+                        Title ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Enter the Title !
+                    </div>
+                </div>
+
+                <div class='mb-3'>
+                    <label class="form-label" for="location"><b>location :</b></label>
+                    <input class="form-control" type="text" id='location' name='location' value="<%= id.location %>"
+                        required>
+                    <div class=" valid-feedback">
+                        location ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Enter the Correct Location !
+                    </div>
+                </div>
+
+                <!--  <div class="mb-3">
+                    <label class="form-label" for="price"><b>Campground Price :</b></label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">₹</span>
+                        <input type="text" class="form-control" id="price" placeholder="Enter the Amount min of ₹100"
+                            aria-label="price" aria-describedby="price-label" name="price" value="<%= id.price %>"
+                            required>
+                        <div class=" valid-feedback">
+                            Price ok!
+                        </div>
+                        <div class='invalid-feedback'>
+                            Enter the Accurate Price !
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <div class='mb-3'>
+                    <label class="form-label" for="img"><b>Upload Image</b></label>
+                    <input type="file" id="img" name="image" multiple>
+                    <div class=" valid-feedback">
+                        Image Url ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Enter the Correct Url !
+                    </div>
+                </div> -->
+                <div class='mb-3'>
+                    <label class="form-label" for="appt"><b>Temple Vision Time</b> </label><br>
+                    <b>Morning -</b> <br> from<input class="form-control" type="time" id="appt" name="mortimein"
+                        value="<%= id.mortimein %>" required> to
+                    <input class="form-control" type="time" id="appt" name="mortimeout" value="<%= id.mortimeout%>"
+                        required>
+                    <br> <b>Afternoon -</b> <br> from<input class="form-control" type="time" id="appt" name="aftimein"
+                        value="<%= id.aftimein%>" required>
+                    to
+                    <input class="form-control" type="time" id="appt" name="aftimeout" value="<%= id.aftimeout%>"
+                        required>
+                    <div class=" valid-feedback">
+                        Time Ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Pick the Time!
+                    </div>
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="special"><b>Temple Special :</b></label>
+                    <input class="form-control" type="text" id='special' name='special' value="<%= id.special%>"
+                        required>
+                    <div class=" valid-feedback">
+                        Temple Special ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the Temple Special!
+                    </div>
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="contact"><b> Temple Contact Number:</b></label>
+                    <input class="form-control" type="number" id='contact' name='contact' value="<%= id.contact%>">
+
+                    <div class=" valid-feedback">
+                        Contact ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the Contact!
+                    </div>
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="website"><b> Temple Website:</b></label>
+                    <input class="form-control" type="text" id='website' name='website' value="<%= id.website%>">
+                    <div class=" valid-feedback">
+                        Contact ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the Contact!
+                    </div>
+                </div>
+
+                <div class='mb-3'>
+                    <label class="form-label" for="description"><b>History :</b></label>
+                    <input class="form-control" type="text" id='description' name='description'
+                        value="<%= id.description%>" required>
+
+                    <div class=" valid-feedback">
+                        History ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the History !
+                    </div>
+                </div>
+                <div class="mb-3 custom-file">
+                    <label for="formFile" class="form-label custom-file-label"><b>Upload More Images :</b></label>
+                    <input class="form-control " type="file" id="formFile" name="image" multiple>
+                    <div class=" valid-feedback">
+                        Image is ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Upload the Images !
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <%id.img.forEach(function(images,i){ %>
+                        <img src="<%=images.thumbnail%>" class="img-thumbnail">
+
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%= i%>" name="deleteImages[]" value="<%=images.filename%>"
+                                placeholder="image cant load ">
+                        </div>
+                        <label for="image-<%= i%>">Delete This?</label>
+                        <% }) %><br>
+                </div>
+
+
+                <div class=' mb-1'><button class="btn btn-info"><b>Submit</b></button>
+                    <a href="/index/<%=id._id %> " class="btn btn-success">Cancel</a>
+                </div>
+
+            </form>
+
+
+
+
+
+
+
+        </div>
+    </div>

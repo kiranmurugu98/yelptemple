@@ -1,0 +1,113 @@
+<% layout('layout/commonpage') %>
+
+
+    <div class="row">
+        <h1 class='text-center'>Create New Temple Here!!</h1>
+        <div class='col-md-6 offset-md-3'>
+
+            <form method="post" action='/index' class="formValid" novalidate enctype="multipart/form-data">
+                <div class='mb-3'>
+                    <label class="form-label" for="title"><b>Temple Name :</b></label>
+                    <input class="form-control" type="text" id='title' name='title' required>
+                    <div class=" valid-feedback">
+                        Title ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Enter the Title !
+                    </div>
+                </div>
+
+                <div class='mb-3'>
+                    <label class="form-label" for="location"><b>location :</b></label>
+                    <input class="form-control" type="text" id='location' name='location' required>
+                    <div class=" valid-feedback">
+                        location ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Enter the Correct Location !
+                    </div>
+                </div>
+
+                <div class="mb-3 custom-file">
+                    <label for="formFile" class="form-label custom-file-label"><b>Upload Images :</b></label>
+                    <input class="form-control" type="file" id="formFile" name="image" multiple required>
+                    <div class=" valid-feedback">
+                        Image is ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Upload the Images !
+                    </div>
+                </div>
+
+
+                <div class='mb-3'>
+                    <label class="form-label" for="appt"><b>Temple Vision Time</b> </label><br>
+                    <b>Morning -</b> <br> from<input class="form-control" type="time" id="appt" name="mortimein"
+                        required> to
+                    <input class="form-control" type="time" id="appt" name="mortimeout" required>
+                    <br> <b>Afternoon -</b> <br> from<input class="form-control" type="time" id="appt" name="aftimein"
+                        required>
+                    to
+                    <input class="form-control" type="time" id="appt" name="aftimeout" required>
+                    <div class=" valid-feedback">
+                        Time Ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Pick the Time!
+                    </div>
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="description"><b>History of the Temple :</b></label>
+                    <textarea class="form-control" type="text" id='description' name='description' required></textarea>
+                    <div class=" valid-feedback">
+                        History ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the History!
+                    </div>
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="special"><b>Temple Special :</b></label>
+                    <input class="form-control" type="text" id='special' name='special' required>
+                    <div class=" valid-feedback">
+                        Temple Special ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the Temple Special!
+                    </div>
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="contact"><b>Temple Contact Number:</b></label>
+                    <input class="form-control" type="number" id='contact' name='contact'>
+                    <div class=" valid-feedback">
+                        Contact ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the Contact!
+                    </div>
+                </div>
+                <div class='mb-3'>
+                    <label class="form-label" for="website"><b>Temple Website:</b></label>
+                    <input class="form-control" type="text" id='website' name='website'>
+                    <div class=" valid-feedback">
+                        Website ok!
+                    </div>
+                    <div class='invalid-feedback'>
+                        Please Enter the Contact!
+                    </div>
+                </div>
+
+
+
+                <div class='mb-1'><button class="bi bi-save2-fill btn btn-info "><b>
+
+                            Submit</b></button>
+                    <span><a href=" /index" class="bi bi-skip-backward-fill btn btn-primary"> Back</a></span>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>

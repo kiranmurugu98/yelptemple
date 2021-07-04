@@ -1,0 +1,14 @@
+<% layout('layout/commonpage') %>
+    <!-- throw error message by render method -->
+    <div class="alert alert-danger col-md-6 offset-md-3" role="alert">
+        <h4 class="alert-heading">
+            <%= err.message %>
+                <!-- here displays the error message -->
+        </h4>
+
+        <p>
+            <%= err.stack %>
+                <!-- here displays the error stack-->
+        </p>
+
+    </div>

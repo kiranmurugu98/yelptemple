@@ -1,0 +1,244 @@
+﻿<% layout('layout/commonpage') %>
+    <p>Translate this page / இந்த பக்கத்தை மொழிபெயர்க்கவும் </p>
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+    <link href="/stylesheet/reviewstar.css" rel="stylesheet">
+    <div class="row pb-3">
+        <div class="col-md-4 col-xl-12">
+
+            <div class="card">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <%id.img.forEach((image, i)=>{ %>
+
+                            <div class="carousel-item <%= i===0 ? 'active' : ''%> ">
+                                <img src="<%= image.url %>" class="d-block w-100" alt="..." width="500px"
+                                    height="500px">
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% if(id.img.length> 1) {%>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <% } %>
+                </div>
+
+
+
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= id.title %>
+                    </h5>
+
+
+                </div>
+
+
+
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <b>History</b> : <br>
+                        <%= id.description %>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Temple special</b> : <br>
+                        <%= id.special %>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Location - </b>
+                        <%= id.location %>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Temple Opening Timing</b> <br>
+                        Morning : <b>
+                            <%= id.mortimein %>
+                        </b> - <b>
+                            <%= id.mortimeout %>
+                        </b>
+                        Afternoon : <b>
+                            <%= id.aftimein %>
+                        </b> - <b>
+                            <%= id.aftimeout %>
+                        </b>
+                    </li>
+                    <li class="list-group-item"><b>Current Time:</b>
+                        <input type="text" id="currentTime" size="1" disabled>
+                    </li>
+                    <!-- <li class="list-group-item"><b>Status:</b>
+                        <input type="text" id="status" size="5" disabled>
+                    </li> -->
+                    <script>
+
+
+                        var today = new Date();
+                        var time = today.getHours() + ":" + today.getMinutes();
+                        document.getElementById("currentTime").value = time;
+
+                        /* var z = document.getElementsByClassName("mortimein").innerText;
+                        var y = document.getElementsByClassName("mortimeout").innerText;
+                        var x = document.getElementsByClassName("aftimein").innerText;
+                        var xx = document.getElementsByClassName("aftimeout").innerText;
+                        if (time === x) {
+                            let timee = 'open'
+                            document.getElementById("status").value = timee;
+                        } else {
+                            let timee = 'closed'
+                            document.getElementById("status").value = timee;
+                        } */
+
+                    </script>
+
+                    <li class="list-group-item">
+                        <b>Temple Contact Number :</b> <b>
+                            <a href="tel:<%= id.contact %>">
+                                <%= id.contact %>
+                            </a>
+                        </b>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Temple Website :</b> <b>
+                            <a href="http://<%= id.website %>">
+                                <%= id.website%>
+                            </a>
+                        </b>
+                    </li>
+                    <li class="list-group-item ">
+                        This Temple Post Created By - <b>
+                            <%= id.user.username.toUpperCase(); %>
+                        </b>
+                    </li>
+
+                </ul>
+                <% if(signedUser && id.user.equals(signedUser._id)){ %>
+                    <div class="card-body">
+                        <a class="bi bi-pencil-square card-link btn btn-info" href="/index/<%= id._id %>/edit">
+                            Edit</a>
+
+                        <form class="d-inline " action="/index/<%=id._id%>?_method=DELETE" method="POST">
+                            <button class="bi bi-trash card-link btn btn-danger"> Delete</button>
+
+                        </form>
+
+
+
+                    </div>
+                    <%} %>
+
+            </div>
+
+
+
+
+        </div>
+        <div class=" col-md-4 col-xl-12">
+            <div>
+                <h3>Use Location Map here!</h3>
+            </div>
+            <div class='d-flex col-md-12 col-md-6 col-md-offset-3'>
+                <div id='map' style='width: 100%; height: 400px;'></div>
+            </div>
+            <br>
+            <div>
+                <a href='/maps'>For Travelling Click Here!</a>
+            </div>
+
+            <%if(signedUser) { %>
+                <div>
+                    <h6>Your Thought About This Temple! Post</h6>
+                    <form action="/index/<%=id._id%>/reviews" method="POST" class="mb-3 formValid" novalidate>
+                        <div class="mb-3">
+                            <fieldset class="starability-heart">
+                                <h6>First rating:</h6>
+                                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked
+                                    aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="rating" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="rating" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="rating" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="rating" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="rating" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="body">Your Thought Here!</label>
+                            <input name="body" id="body" type='text' class="form-control" required></input>
+                            <div class='invalid-feedback'>
+                                Need Your Review Please!
+                            </div>
+                            <div class='valid-feedback'>
+                                Nice review!
+                            </div>
+
+                        </div>
+                        <button class="btn btn-info bi bi-plus"> Add</button>
+                    </form>
+
+                </div>
+                <%} %>
+                    <% for(let about of id.reviews) { %>
+                        <div class="card mb-3 ">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">Reviewed By - <b>
+                                        <%= about.user.username.toUpperCase() %>
+                                    </b>
+                                </h6>
+                                <p class="starability-result" data-rating="<%= about.rating %>">
+                                    Rated: <%= about.rating %> stars
+                                </p>
+
+                                <p class="card-text">Review: <%= about.body %>
+                                </p>
+
+                                <% if(signedUser && about.user.equals(signedUser._id)){ %>
+
+                                    <form action="/index/<%= id._id%>/reviews/<%=about._id%>?_method=DELETE"
+                                        method="post">
+                                        <button class="bi bi-trash btn btn-danger btn-sm d-inline">
+                                            <b>Review</b></button>
+                                    </form>
+                                    <% } %>
+
+                            </div>
+                        </div>
+                        <% } %>
+
+        </div>
+    </div>
+
+
+    <script>
+        let maptoken = '<%=process.env.MAP%>'
+        const campground = <%- JSON.stringify(id) %>
+    </script>
+
+
+
+
+
+    <script src="/js/map.js"></script>
